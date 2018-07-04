@@ -11,7 +11,7 @@ class Home extends Component {
 }
 
 postQuestion = questionId => {
-    this.props.history.push(`/create-exam`, {
+    this.props.history.push(`/postquestion`, {
         questionId
     });
   }

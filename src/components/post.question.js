@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
 
-import { withRouter } from 'react-router-dom';
 
 class PostQuestions extends Component {
-  constructor() {
-    super();
-    
-    const storedQuestions = localStorage.getItem("exam");
-    const questions = (storedQuestions !== null) ? JSON.parse(storedQuestions) : [];
-    console.log(questions);
-    this.state = {
-       questions }
-  }
+ 
 
 
   post = (e) => {
@@ -51,13 +42,15 @@ class PostQuestions extends Component {
                 <br />
             <form name="post" onSubmit={this.post}>
                 
-               
+            <label htmlFor="subject">Subject</label>
+            <input name="subject" type="text" className="form-control" required/>
+
                 <br />
                 <label htmlFor="question">Question</label>
                 <textarea name="question" className="form-control"required></textarea>
                 
                 <br />
-                <label htmlFor="correctAnswer">Enter Correct Answer</label>
+                <label htmlFor="correctAnswer">Correct Answer</label>
                 <input name="correctAnswer" type="text" className="form-control" required/>
 
                 <br />

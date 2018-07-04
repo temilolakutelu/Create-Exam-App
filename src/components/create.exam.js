@@ -12,12 +12,12 @@ class CreateExam extends Component{
     
         const newExam = { subject, duration };
     
-        const storedExam = localStorage.getItem("exam");
+        const storedExam = localStorage.getItem(subject);
        
         const exam = (storedExam !== null) ? JSON.parse(storedExam) : [];
        exam.push(newExam);
-        localStorage.setItem("exam", JSON.stringify(exam));
-        console.log(localStorage.getItem("exam"));
+        localStorage.setItem(subject, JSON.stringify(exam));
+        console.log(localStorage.getItem(subject));
         
         
     this.postQuestion();
