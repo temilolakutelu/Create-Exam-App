@@ -1,43 +1,33 @@
 import React, { Component } from 'react';
 import Navbar from './navbar';
 
+import { withRouter } from 'react-router-dom';
+
 class PostQuestions extends Component {
+  constructor() {
+    super();
+    
+    const storedQuestions = localStorage.getItem("exam");
+    const questions = (storedQuestions !== null) ? JSON.parse(storedQuestions) : [];
+    console.log(questions);
+    this.state = {
+       questions }
+  }
 
-constructor(props){
-  super(props);
-
-  const {match:{params:{questionId}}}=this.props;
- const storedQuestions = localStorage.getItem("exam");
- 
-const questions = (storedQuestions !== null) ? JSON.parse(storedQuestions) : [];
-console.log(questions);
-console.log(questions[questionId]);
-// let { subject, duration, answers}  = questions[questionId];
-
-// this.state = {
-//   Question: {
-//     subject,
-//    duration
-// },
-//   questionId,
-//   questions,
- 
-// }
-}
 
   post = (e) => {
     e.preventDefault();
   console.log(e.target.value);
 
  
- 
+    const subject = e.target.subject.value;
     const question = e.target.question.value;
     const correctAnswer=e.target.correctAnswer.value;
     const option1=e.target.option1.value;
     const option2=e.target.option2.value;
     const option3=e.target.option3.value;
 
-    const newQuestion = {  question, correctAnswer, option1, option2, option3 };
+    const newQuestion = { subject, question, correctAnswer, option1, option2, option3 };
 
     const storedQuestions = localStorage.getItem("questions");
    
@@ -45,6 +35,10 @@ console.log(questions[questionId]);
     questions.push(newQuestion);
     localStorage.setItem("questions", JSON.stringify(questions));
     console.log(localStorage.getItem("questions"));
+    
+  
+
+    
   }
 
   render() {
@@ -52,10 +46,12 @@ console.log(questions[questionId]);
       
         <div className="container">
         <Navbar/>
+        <br />
+        <h3>Question Page</h3>
+                <br />
             <form name="post" onSubmit={this.post}>
-                <h3>Question Page</h3>
-                <br /><br />
                 
+               
                 <br />
                 <label htmlFor="question">Question</label>
                 <textarea name="question" className="form-control"required></textarea>
