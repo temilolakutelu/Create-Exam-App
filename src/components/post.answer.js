@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import Navbar from './navbar';
-import ReactDOM from 'react-dom';
+
 
 import { 
   ListGroup,
   ListGroupItem
 }  from 'react-bootstrap';
-import questions from './questions';
+
 
 class PostAnswer extends Component {
   

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { withRouter } from 'react-router-dom';
+
 import Navbar from './navbar';
-import { NavLink } from 'react-router-dom';
+
 
 class Home extends Component {
     constructor() {

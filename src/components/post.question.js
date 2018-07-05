@@ -64,7 +64,7 @@ class PostQuestions extends Component {
 
                 <label htmlFor="option3">Option 3 </label>
                 <input name="option3" type="text" className="form-control" required />
-
+<br/><br/>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
         </div>
