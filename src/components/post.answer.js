@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
+
 import Navbar from './navbar';
 import ReactDOM from 'react-dom';
 
 import { 
   ListGroup,
-  ListGroupItem,
-  Button,
-  FormGroup,
-  FormControl,
-  InputGroup
+  ListGroupItem
 }  from 'react-bootstrap';
+import questions from './questions';
 
 class PostAnswer extends Component {
   
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.addAnswer = this.addAnswer.bind(this);
-  
+    
+    
     const {match:{params:{questionId}}}=this.props;
     
     const storedQuestions = localStorage.getItem("questions");
@@ -43,26 +41,7 @@ class PostAnswer extends Component {
   }
 
 
-  addAnswer = (e) => {  
-   
-    e.preventDefault();
-    const { questionId, questions } = this.state;
-
-    let question = questions[questionId];
-    let answer = this.state.correct;
-   
-    
-    if (answer===this.state.Question.correctAnswer){
-      alert('correctAnswer');
-      this.setState({
-        score: this.state.score + 1
-       })
-
-    }
-    else{
-      alert('wrong answer');
-    }
-  }
+  
 
   handleChange(e){
     this.setState({
@@ -70,6 +49,7 @@ class PostAnswer extends Component {
     })
   }
 
+  
   render() {
     
     return (
@@ -80,14 +60,47 @@ class PostAnswer extends Component {
         <br />
         <h3>{this.state.Question.subject}</h3>
         <p>{this.state.Question.question}</p>
-        <form name="post" onSubmit={this.addAnswer}>
-  <input type="radio" name="answer"   onChange={this.handleChange} value={this.state.Question.correctAnswer}/> {this.state.Question.correctAnswer}<br/>
-  <input type="radio" name="answer"   onChange={this.handleChange} value={this.state.Question.option1}/>{this.state.Question.option1}<br/>
-  <input type="radio"   name="answer" onChange={this.handleChange} value={this.state.Question.option2}/> {this.state.Question.option2}<br/>
-  <input type="radio" name="answer"   onChange={this.handleChange} value={this.state.Question.option3}/> {this.state.Question.option3}<br/>
+       
+<ListGroup>
+{this.state.questions.map((Q, i) => {
+    return (
+        <ListGroupItem key={i} >
+            <h4>{Q.subject}</h4>
+            <p>{Q.question}</p>
+            <form name="post" >
+  <input type="radio" name="answer"   onChange={this.handleChange} value={Q.correctAnswer}/> {Q.correctAnswer}<br/>
+  <input type="radio" name="answer"   onChange={this.handleChange} value={Q.option1}/>{Q.option1}<br/>
+  <input type="radio"   name="answer" onChange={this.handleChange} value={Q.option2}/> {Q.option2}<br/>
+  <input type="radio" name="answer"   onChange={this.handleChange} value={Q.option3}/> {Q.option3}<br/>
   <br/>
-<button >Submit</button>
+<button ref={(e)=> this[`button-${i}`] = e} id="myBtn" className="btn btn-primary" onClick={(e) => {
+  e.preventDefault();
+  const { questionId, questions } = this.state;
+
+  let question = questions[questionId];
+  let answer = this.state.correct;
+ 
+  if (answer===Q.correctAnswer){
+    alert('correctAnswer');
+    this.setState({
+      score: this.state.score + 1
+     })
+     this[`button-${i}`].disabled = true;
+     
+     
+  }
+  else{
+    alert('wrong answer');
+    this[`button-${i}`].disabled = true;
+  }
+
+}
+}>Submit</button>
 </form> 
+        </ListGroupItem>
+    )
+})}
+</ListGroup>
        
           </div>
     );

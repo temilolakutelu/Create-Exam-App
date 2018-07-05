@@ -9,6 +9,7 @@ class Questions extends Component {
     super();
     
     const storedQuestions = localStorage.getItem("questions");
+    console.log(storedQuestions);
     const questions = (storedQuestions !== null) ? JSON.parse(storedQuestions) : [];
     
     this.state = { questions }

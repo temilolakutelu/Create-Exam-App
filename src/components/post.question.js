@@ -3,12 +3,10 @@ import Navbar from './navbar';
 
 
 class PostQuestions extends Component {
- 
-
-
+  
   post = (e) => {
     e.preventDefault();
-  console.log(e.target.value);
+
 
  
     const subject = e.target.subject.value;
@@ -22,10 +20,12 @@ class PostQuestions extends Component {
 
     const storedQuestions = localStorage.getItem("questions");
    
+   
     const questions = (storedQuestions !== null) ? JSON.parse(storedQuestions) : [];
     questions.push(newQuestion);
+
     localStorage.setItem("questions", JSON.stringify(questions));
-    console.log(localStorage.getItem("questions"));
+    document.getElementById("post").reset();
     
   
 
@@ -40,7 +40,7 @@ class PostQuestions extends Component {
         <br />
         <h3>Question Page</h3>
                 <br />
-            <form name="post" onSubmit={this.post}>
+            <form id="post" name="post" onSubmit={this.post}>
                 
             <label htmlFor="subject">Subject</label>
             <input name="subject" type="text" className="form-control" required/>
