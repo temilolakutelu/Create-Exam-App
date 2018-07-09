@@ -54,8 +54,6 @@ class PostAnswer extends Component {
                   <br />
                   <button ref={(e) => this[`button-${i}`] = e} id="myBtn" className="btn btn-primary" onClick={(e) => {
                     e.preventDefault();
-                    // const { questionId, questions } = this.state;
-                    // let question = questions[questionId];
                     let answer = this.state.correct;
                     if (answer === Q.correctAnswer) {
                       alert('correctAnswer');
